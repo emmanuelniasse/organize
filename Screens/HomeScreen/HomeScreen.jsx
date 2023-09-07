@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    View,
-    Button,
-    TextInput,
-    Text,
-    Pressable,
-} from 'react-native';
+import { View, TextInput, Text, Pressable } from 'react-native';
 import axios from 'axios';
 
 // CSS
@@ -103,11 +97,6 @@ const HomeScreen = ({ navigation }) => {
                     </Pressable>
                 </>
             )}
-
-            <Button
-                title='Aller à la page "Détails"'
-                onPress={() => navigation.navigate('Details')}
-            />
         </View>
     );
 };
