@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, Text, Pressable } from 'react-native';
+
+// Libraries
 import axios from 'axios';
+import slugify from 'slugify';
 
 // CSS
 import styles from './HomeScreenStyle';
@@ -31,16 +34,21 @@ const HomeScreen = ({ navigation }) => {
         }
     }, [areCategoriesFetched]);
 
-    const createCategory = async (val) => {
-        let newCategory = {
-            name: val,
-            slug: val,
-        };
+    const createCategory = async (categoryName) => {
+        let categorySlug = slugify(categoryName, '-').toLowerCase();
 
-        await axios.post(
-            'http://localhost:3000/categories/',
-            newCategory
-        );
+        let newCategory = {
+            name: categoryName,
+            slug: categorySlug,
+        };
+        try {
+            await axios.post(
+                'http://localhost:3000/categories/',
+                newCategory
+            );
+        } catch (err) {
+            console.log('Erreur : ' + err);
+        }
 
         setAreCategoriesFetched(false);
         setInputValue('');
