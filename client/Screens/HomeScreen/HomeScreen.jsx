@@ -16,13 +16,13 @@ const HomeScreen = ({ navigation }) => {
         const getCategories = async () => {
             try {
                 const responseCategories = await axios.get(
-                    'http://localhost:3000/classes/'
+                    'http://localhost:3000/categories/'
                 );
                 setCategories(responseCategories.data.result);
                 setAreCategoriesFetched(true);
             } catch (err) {
                 console.log(
-                    'Erreur lors de la requête (classes) : ' + err
+                    'Erreur lors de la requête (categories) : ' + err
                 );
             }
         };
@@ -34,10 +34,11 @@ const HomeScreen = ({ navigation }) => {
     const createCategory = async (val) => {
         let newCategory = {
             name: val,
+            slug: val,
         };
 
         await axios.post(
-            'http://localhost:3000/classes/',
+            'http://localhost:3000/categories/',
             newCategory
         );
 
